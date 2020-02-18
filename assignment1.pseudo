@@ -1,1 +1,22 @@
 // init CallInitialization into Future Event List from the start
+
+//Initialization
+simulationClock = 0;
+numBlocked = 0;
+numDropped = 0;
+numTotal = 0;
+
+//create an array StationList consisting of 20 Stations.
+StationList = new Station[20];
+
+For FCA Scheme 1, initialize each attribute of the Station to be:
+-	Num_Available_Free_Channels: 10
+-	Num_Channels_Reserved_For_Handover: 0
+-	Max_ Channels_Reserved_For_Handover: 0
+For FCA Scheme 2, initialize each attribute to be:
+-	Num_Available_Free_Channels: 9
+-	Num_Channels_Reserved_For_Handover: 1
+-	Max_ Channels_Reserved_For_Handover: 1
+
+From the provided dataset, load each car into the system.
+For each car, schedule a CallInitializationEvent at the car's arrival time.
