@@ -80,8 +80,67 @@ CallInitializationEvent(car){
 }
 
 
+CallHandoverEvent(car, timeSpent){
+    //timeSpent is the time the car has spent for the call up to this event.
+    //so we have to subtract it from the call duration.
+    car.CallDuration -= timeSpent;
 
+    previousStation = StationList[car.CurrentStation - 1];
 
+    if (previousStation.Num_Channels_Reserved_For_Handover < previousStation.Max_Channels_Reserved_For_Handover){
+        //in this case, a channel reserved to handle handover call was used previously by the car, so we release it.
+        previousStation.Num_Channels_Reserved_For_Handover++;
+    }
+    else {
+        //in this case, a normal channel was used previously by the car, so we release it.
+        previousStation.Num_Available_Free_Channels++;
+    }
 
+    //move the car to the next station in its direction
+    if (car.Direction == left)
+        car.CurrentStation++;
+    else car.CurrentStation--;
 
+    thisStation = StationList[car.CurrentStation - 1];
+
+    //this part of the code is to assign a channel to the car, if possible
+    if (thisStation.Num_Available_Free_Channels == 0){
+        //only if there are no normal channels left
+        //then we attempt to allocate the reserved channel for handover to the car
+
+        if (thisStation.Num_Channels_Reserved_For_Handover == 0){
+            //in this case, no channel is left for the car, hence the call is dropped, and the event end.
+            numDropped++;
+            numTotal++;
+
+            //end the event
+            return;
+        }
+        else thisStation.Num_Channels_Reserved_For_Handover--;
+    }
+    else {
+        thisStation.Num_Available_Free_Channels--;
+    }
+
+    //max_call_time is the maximum time for the call inside this station.
+    //max_call_time is calculated in seconds, meanwhile the velocity is calculated in km/h. hence we have to multiply by 3600
+    //the car starts at the beginning of the cell, so it can travel maximally 2km in this call.
+    max_call_time = 2/car.Velocity * 3600;
+
+    
+    //the following part of the CallHandover event is to schedule the next Call Termintation or Call Handover event.
+    //it is handled similar to the same part of Call Initialization Event, hence no comments is typed here.
+    if (car.CallDuration <= max_call_time){
+        FutureEventList.add(new CallTerminationEvent(car, car.CallDuration), simulationClock + car.CallDuration);
+    }
+    else {
+        if (car.Direction == left AND car.CurrentStation == 20) OR 
+           (car.Direction == right AND car.CurrentStation == 0) {
+            FutureEventList.add(new CallTerminationEvent(car, max_call_time), simulationClock + max_call_time);
+        }
+        else {
+            FutureEventList.add(new CallHandoverEvent(car, max_call_time), simulationClock + max_call_time);
+        }   
+    }
+}
 
