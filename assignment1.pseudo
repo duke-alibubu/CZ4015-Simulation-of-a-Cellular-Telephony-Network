@@ -16,17 +16,15 @@ Initialize the Future Event List.
 For FCA Scheme 1, initialize each attribute of the Station to be:
 -	Num_Available_Free_Channels: 10
 -	Num_Channels_Reserved_For_Handover: 0
--	Max_ Channels_Reserved_For_Handover: 0
+-	Max_Channels_Reserved_For_Handover: 0
 For FCA Scheme 2, initialize each attribute to be:
 -	Num_Available_Free_Channels: 9
 -	Num_Channels_Reserved_For_Handover: 1
--	Max_ Channels_Reserved_For_Handover: 1
+-	Max_Channels_Reserved_For_Handover: 1
 
 From the provided dataset, load each car into the system.
 For each car, schedule a CallInitializationEvent at the car's arrival time.
 
-
-//Call Initialization Event
 
 CallInitializationEvent(car){
     //since the car's base station is 1-indexed, we have to subtract it by 1 to traverse in the StationList
@@ -34,6 +32,10 @@ CallInitializationEvent(car){
 
     //randomize the car's direction to be either left or right
     car.Direction = Random(left, right);
+
+    //randomize the car's initial position within this cell, 
+    //measured by meter with respect to the leftmost border of the cell.
+    initialPosition = Random(0, 2000);
 
     if (station.Num_Available_Free_Channels == 0){
         //Block the call if there is not free channels left to handle the call
@@ -45,9 +47,13 @@ CallInitializationEvent(car){
         
 
         //max_call_time is the maximum time for the call inside this station.
-        //Based on the assumptions, each car starts its call in the station, which is 1km away from the end of the station.
         //max_call_time is calculated in seconds, meanwhile the velocity is calculated in km/h. hence we have to multiply by 3600
-        max_call_time = (1/car.Velocity) * 3600;
+        //And we have to divide it by 1000 since the distance is measured in meters. 3600/1000 = 3.6
+        if (car.Direction == left){
+            //if the car's direction is left, (it means it is 2000 - initialPosition) meters away from the end of the station.
+            max_call_time = (2000 - initialPosition)/car.Velocity * 3.6;
+        }
+        else max_call_time = initialPosition/car.Velocity * 3.6;
 
         if (car.CallDuration <= max_call_time){
             //in this case, the car's call ends within this station.
@@ -72,3 +78,10 @@ CallInitializationEvent(car){
         }
     }
 }
+
+
+
+
+
+
+
