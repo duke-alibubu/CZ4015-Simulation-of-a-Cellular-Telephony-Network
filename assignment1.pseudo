@@ -163,5 +163,5 @@ CallTerminationEvent(car, timeSpent){
         previousStation.Num_Available_Free_Channels++;
     }
 
-    numTotal++''
+    numTotal++;
 }
