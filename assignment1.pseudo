@@ -127,7 +127,7 @@ CallHandoverEvent(car, timeSpent){
     //the car starts at the beginning of the cell, so it can travel maximally 2km in this call.
     max_call_time = 2/car.Velocity * 3600;
 
-    
+
     //the following part of the CallHandover event is to schedule the next Call Termintation or Call Handover event.
     //it is handled similar to the same part of Call Initialization Event, hence no comments is typed here.
     if (car.CallDuration <= max_call_time){
@@ -144,3 +144,24 @@ CallHandoverEvent(car, timeSpent){
     }
 }
 
+
+CallTerminationEvent(car, timeSpent){
+    //timeSpent is the time the car has spent for the call up to this event.
+    //so we have to subtract it from the call duration.
+    car.CallDuration -= timeSpent;
+
+
+    //in this part, we attempt to release the channel previously used by the car.
+    previousStation = StationList[car.CurrentStation - 1];
+
+    if (previousStation.Num_Channels_Reserved_For_Handover < previousStation.Max_Channels_Reserved_For_Handover){
+        //in this case, a channel reserved to handle handover call was used previously by the car, so we release it.
+        previousStation.Num_Channels_Reserved_For_Handover++;
+    }
+    else {
+        //in this case, a normal channel was used previously by the car, so we release it.
+        previousStation.Num_Available_Free_Channels++;
+    }
+
+    numTotal++''
+}
