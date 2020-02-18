@@ -1,4 +1,6 @@
 // init CallInitialization into Future Event List from the start
+//Assumptions: Each car starts in the middle of the station
+
 
 //Initialization
 simulationClock = 0;
@@ -8,6 +10,8 @@ numTotal = 0;
 
 //create an array StationList consisting of 20 Stations.
 StationList = new Station[20];
+
+Initialize the Future Event List.
 
 For FCA Scheme 1, initialize each attribute of the Station to be:
 -	Num_Available_Free_Channels: 10
@@ -20,3 +24,51 @@ For FCA Scheme 2, initialize each attribute to be:
 
 From the provided dataset, load each car into the system.
 For each car, schedule a CallInitializationEvent at the car's arrival time.
+
+
+//Call Initialization Event
+
+CallInitializationEvent(car){
+    //since the car's base station is 1-indexed, we have to subtract it by 1 to traverse in the StationList
+    station = StationList[car.CurrentStation - 1];
+
+    //randomize the car's direction to be either left or right
+    car.Direction = Random(left, right);
+
+    if (station.Num_Available_Free_Channels == 0){
+        //Block the call if there is not free channels left to handle the call
+        numBlocked++;
+        numTotal++;
+    }
+    else {
+        station.Num_Available_Free_Channels--;
+        
+
+        //max_call_time is the maximum time for the call inside this station.
+        //Based on the assumptions, each car starts its call in the station, which is 1km away from the end of the station.
+        //max_call_time is calculated in seconds, meanwhile the velocity is calculated in km/h. hence we have to multiply by 3600
+        max_call_time = (1/car.Velocity) * 3600;
+
+        if (car.CallDuration <= max_call_time){
+            //in this case, the car's call ends within this station.
+            //So we schedule a Call Termination Event at simulationClock + the car's call duration.
+            FutureEventList.add(new CallTerminationEvent(car, car.CallDuration), simulationClock + car.CallDuration);
+        }
+        else {
+            //in this case, the car's does not end within this station.
+
+            if (car.Direction == left AND car.CurrentStation == 20) OR 
+               (car.Direction == right AND car.CurrentStation == 0) {
+                //in this case, the call has not ended but the car has reached the last station in its direction.
+                //So we schedule a Call Termination Event at simulationClock + max_call_time.
+                FutureEventList.add(new CallTerminationEvent(car, max_call_time), simulationClock + max_call_time);
+            }
+            else {
+                //in this case, the call has not ended and the car has not reached the last station in its direction.
+                //So we we schedule a Call Handover Event at simulationClock + max_call_time.
+                FutureEventList.add(new CallHandoverEvent(car, max_call_time), simulationClock + max_call_time);
+            }
+                
+        }
+    }
+}
