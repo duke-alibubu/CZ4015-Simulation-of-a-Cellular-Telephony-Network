@@ -1,8 +1,8 @@
-// init CallInitialization into Future Event List from the start
+// init CallInititation into Future Event List from the start
 //Assumptions: Each car starts in the middle of the station
 
 
-//Initialization
+//Inititation
 simulationClock = 0;
 numBlocked = 0;
 numDropped = 0;
@@ -23,10 +23,10 @@ For FCA Scheme 2, initialize each attribute to be:
 -	Max_Channels_Reserved_For_Handover: 1
 
 From the provided dataset, load each car into the system.
-For each car, schedule a CallInitializationEvent at the car's arrival time.
+For each car, schedule a CallInititationEvent at the car's arrival time.
 
 
-CallInitializationEvent(car){
+CallInititationEvent(car){
     //since the car's base station is 1-indexed, we have to subtract it by 1 to traverse in the StationList
     station = StationList[car.CurrentStation - 1];
 
@@ -129,7 +129,7 @@ CallHandoverEvent(car, timeSpent){
 
 
     //the following part of the CallHandover event is to schedule the next Call Termintation or Call Handover event.
-    //it is handled similar to the same part of Call Initialization Event, hence no comments is typed here.
+    //it is handled similar to the same part of Call Inititation Event, hence no comments is typed here.
     if (car.CallDuration <= max_call_time){
         FutureEventList.add(new CallTerminationEvent(car, car.CallDuration), simulationClock + car.CallDuration);
     }
