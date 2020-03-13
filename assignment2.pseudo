@@ -1,0 +1,64 @@
+StationList[];
+CarProcess(){
+    station_number = Generate_Station_Cell_From_Distribution_X();   //station numbered from 0 to 19
+    direction = Generate_Direction_With_Equal_Probabilities();      //either left or right
+    initial_position = Generate_Initial_Position_From_Uniform_Distribution();    //distance w.r.t to leftmost border, between 0 to 2000
+    speed = Generate_Station_Cell_From_Distribution_Y();
+    call_duration = Generate_Station_Cell_From_Distribution_Z();
+    
+    if (StationList[station_number].num_Available_Free_Channels == 0){
+        numBlocked++;
+    }
+    else {
+        //not blocked call
+
+        //init max_call_time
+        if (car.Direction == left){
+            //if the car's direction is left, (it means it is 2000 - initialPosition) meters away from the end of the station.
+            max_call_time = (2000 - initial_position)/speed * 3.6;
+        }
+        else 
+            max_call_time = initial_position/speed * 3.6;
+        
+        while (call_duration > 0){
+            StationList[station_number].num_Available_Free_Channels--;
+
+            if (call_duration <= max_call_time){
+                //in this case, the car's call ends within this station.
+                Hold(call_duration);
+                StationList[station_number].num_Available_Free_Channels++;
+                call_duration = 0;
+                break;
+            }
+            else {
+                //does not end within this station - so it runs towards the end.
+                Hold(max_call_time);
+                call_duration -= max_call_time;
+
+                //after this, it goes out of this cell, so release a channel
+                StationList[station_number].num_Available_Free_Channels++;
+
+                if (direction == left AND station_number == 19) OR (direction == right AND station_number == 0){
+                    //exit the highway
+                    break;
+                }
+                else {
+                    //continue to next station
+                    if (direction == left)
+                        station_number++;
+                    else station_number--;
+
+                    if (StationList[station_number].num_Available_Free_Channels == 0){
+                        numDropped++;
+                        break;
+                    }
+                    else {
+                        //go to the next station! reset max_call_time
+                        max_call_time = 2000/speed * 3.6;
+                    }
+                }
+            }
+        }
+    }
+    numTotal++;
+}
