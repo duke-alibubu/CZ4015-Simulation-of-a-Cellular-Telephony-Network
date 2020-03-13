@@ -3,8 +3,8 @@ CarProcess(){
     station_number = Generate_Station_Cell_From_Distribution_X();   //station numbered from 0 to 19
     direction = Generate_Direction_With_Equal_Probabilities();      //either left or right
     initial_position = Generate_Initial_Position_From_Uniform_Distribution();    //distance w.r.t to leftmost border, between 0 to 2000
-    speed = Generate_Station_Cell_From_Distribution_Y();
-    call_duration = Generate_Station_Cell_From_Distribution_Z();
+    speed = Generate_Speed_From_Distribution_Y();
+    call_duration = Generate_Call_Duration_From_Distribution_Z();
     
     if (StationList[station_number].num_Available_Free_Channels == 0){
         numBlocked++;
@@ -12,15 +12,18 @@ CarProcess(){
     else {
         //not blocked call
 
-        //init max_call_time
-        if (car.Direction == left){
+        //initialize max_call_time
+        //max_call_time is the maximum number of time the car spent in a station
+        if (direction == left){
             //if the car's direction is left, (it means it is 2000 - initialPosition) meters away from the end of the station.
-            max_call_time = (2000 - initial_position)/speed * 3.6;
+            max_call_time = (2000 - initial_position)/speed;
         }
         else 
-            max_call_time = initial_position/speed * 3.6;
+            max_call_time = initial_position/speed;
         
         while (call_duration > 0){
+
+            //acquire a channel
             StationList[station_number].num_Available_Free_Channels--;
 
             if (call_duration <= max_call_time){
@@ -35,7 +38,7 @@ CarProcess(){
                 Hold(max_call_time);
                 call_duration -= max_call_time;
 
-                //after this, it goes out of this cell, so release a channel
+                //after this, the car goes out of this cell, so release a channel
                 StationList[station_number].num_Available_Free_Channels++;
 
                 if (direction == left AND station_number == 19) OR (direction == right AND station_number == 0){
@@ -49,16 +52,27 @@ CarProcess(){
                     else station_number--;
 
                     if (StationList[station_number].num_Available_Free_Channels == 0){
+                        //next station does not have any channel left - call dropped
                         numDropped++;
                         break;
                     }
                     else {
-                        //go to the next station! reset max_call_time
-                        max_call_time = 2000/speed * 3.6;
+                        //go to the next station! Reset max_call_time
+                        max_call_time = 2000/speed;
                     }
                 }
             }
         }
     }
+
+    //after the car process finishes, increase total number of calls 
     numTotal++;
+}
+
+
+MainProcess(){
+    While (terminating_condition not true) {
+        Hold(ITA); //ITA is inter-arrival time of cars
+        Create and activate a CarProcess;
+    }
 }
