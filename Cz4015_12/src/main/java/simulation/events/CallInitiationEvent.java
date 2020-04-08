@@ -13,7 +13,7 @@ public class CallInitiationEvent implements CallEventInterface {
     }
 
     public void execute() {
-        Station station = StationListContainer.getStationList().get(call.getBaseStation() - 1);
+        Station station = StationListContainer.getStationList().get(call.baseStation - 1);
         if (station.numAvailableFreeChannels == 0){
             MainProcess.numBlocked++;
             MainProcess.numTotal++;
@@ -30,7 +30,7 @@ public class CallInitiationEvent implements CallEventInterface {
                 //FutureEventList.add(new CallTerminationEvent(car, car.CallDuration), simulationClock + car.CallDuration);
             }
             else {
-                if ((call.getDirection() == Direction.Left && call.getBaseStation() == 20) || (call.getDirection() == Direction.Right && call.getBaseStation() == 0)){
+                if ((call.getDirection() == Direction.Left && call.baseStation == 20) || (call.getDirection() == Direction.Right && call.baseStation == 0)){
                     //FutureEventList.add(new CallTerminationEvent(car, max_call_time), simulationClock + max_call_time);
                 }
                 else {
