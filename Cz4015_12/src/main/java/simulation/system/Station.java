@@ -19,4 +19,16 @@ public class Station {
     public int generateInitialPositionWithinThisStation(){
         return initialPositionGenerator.generateInitialPosition();
     }
+
+    public int getNumAvailableFreeChannels() {
+        return numAvailableFreeChannels;
+    }
+
+    public int getNumChannelsReservedForHandover() {
+        return numChannelsReservedForHandover;
+    }
+
+    public int getMaxChannelsReservedForHandover() {
+        return maxChannelsReservedForHandover;
+    }
 }
