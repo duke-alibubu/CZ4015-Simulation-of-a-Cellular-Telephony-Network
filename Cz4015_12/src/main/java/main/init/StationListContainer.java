@@ -8,7 +8,7 @@ import java.util.List;
 
 public class StationListContainer {
     private final static int NUMBER_OF_STATIONS = 20;
-    public static List<Station> stationList = new ArrayList<Station>(NUMBER_OF_STATIONS);
+    public static List<Station> stationList;
 
 
     private int numAvailableFreeChannels;
@@ -26,6 +26,7 @@ public class StationListContainer {
             default:
                 break;
         }
+        stationList = new ArrayList<Station>(NUMBER_OF_STATIONS);
         for (int i = 0; i < NUMBER_OF_STATIONS; i++)
             stationList.add(new Station(numAvailableFreeChannels, numChannelsReservedForHandover));
 
