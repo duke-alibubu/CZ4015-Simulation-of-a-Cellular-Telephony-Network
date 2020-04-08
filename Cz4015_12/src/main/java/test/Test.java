@@ -1,8 +1,13 @@
 package test;
 
+import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
 import main.init.StationListContainer;
 import utils.enums.FCAScheme;
 import utils.generators.InitialPositionGenerator;
+
+import java.io.FileReader;
+import java.util.List;
 
 public class Test {
     public static void main(String[] args){
@@ -32,5 +37,28 @@ public class Test {
 //        System.out.println(StationListContainer.stationList.get(0).numAvailableFreeChannels);
 //        System.out.println(StationListContainer.stationList.get(0).maxChannelsReservedForHandover);
 //        System.out.println(StationListContainer.stationList.get(0).numChannelsReservedForHandover);
+        String filepath = "D:/My Folder/Academic/Year 3 Sem 2/CZ4015 Simulation & Modeling/Assignment/Cz4015_12/src/main/resources/PCS_TEST_DETERMINSTIC_19S2.csv";
+        try {
+            // Create an object of file reader
+            // class with CSV file as a parameter.
+            FileReader filereader = new FileReader(filepath);
+
+            // create csvReader object and skip first Line
+            CSVReader csvReader = new CSVReaderBuilder(filereader)
+                    .withSkipLines(1)
+                    .build();
+            List<String[]> allData = csvReader.readAll();
+
+            // print Data
+            for (String[] row : allData) {
+                for (String cell : row) {
+                    System.out.print(cell);
+                }
+                System.out.println();
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
