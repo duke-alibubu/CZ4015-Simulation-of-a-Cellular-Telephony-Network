@@ -1,10 +1,9 @@
 package utils;
 
-import utils.Direction;
-
 import java.util.Random;
 
 public class DirectionGenerator {
+    //let the RNG to be static since all the directions follow an equal probability
     private static Random rand = new Random();
 
     public static Direction generateDirection(){
