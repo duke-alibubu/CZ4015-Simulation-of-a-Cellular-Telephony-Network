@@ -1,6 +1,6 @@
 package test;
 
-import generators.InitialPositionGenerator;
+import utils.generators.InitialPositionGenerator;
 
 public class Test {
     public static void main(String[] args){
