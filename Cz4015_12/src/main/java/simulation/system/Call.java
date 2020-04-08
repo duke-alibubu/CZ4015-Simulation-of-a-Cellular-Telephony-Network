@@ -7,9 +7,11 @@ import utils.generators.DirectionGenerator;
 public class Call {
     private double arrivalTime;
     private int baseStation;
-    private double callDuration;
+    public double callDuration;
     private double velocity;
     private Direction direction;
+
+    //initial position with respect to the leftmost border of the station
     private int initialPosition;
 
     public Call(double arrivalTime, int baseStation, double callDuration, double velocity) {
@@ -39,10 +41,6 @@ public class Call {
 
     public int getBaseStation() {
         return baseStation;
-    }
-
-    public double getCallDuration() {
-        return callDuration;
     }
 
     public double getVelocity() {
