@@ -1,5 +1,5 @@
 package simulation.events;
 
 public interface CallEventInterface {
-    public void run();
+    public void execute();
 }
