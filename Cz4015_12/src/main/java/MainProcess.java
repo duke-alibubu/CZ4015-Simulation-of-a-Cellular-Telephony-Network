@@ -1,7 +1,7 @@
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
-import main.init.StationListContainer;
-import main.system.Car;
+import simulation.init.StationListContainer;
+import simulation.system.Car;
 import utils.enums.FCAScheme;
 
 import java.io.FileReader;

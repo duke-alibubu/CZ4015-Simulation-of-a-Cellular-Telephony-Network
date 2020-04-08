@@ -1,4 +1,4 @@
-package main.system;
+package simulation.system;
 
 import utils.generators.InitialPositionGenerator;
 

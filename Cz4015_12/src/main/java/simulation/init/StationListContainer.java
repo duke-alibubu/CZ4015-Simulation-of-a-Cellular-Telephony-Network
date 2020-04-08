@@ -1,6 +1,6 @@
-package main.init;
+package simulation.init;
 
-import main.system.Station;
+import simulation.system.Station;
 import utils.enums.FCAScheme;
 
 import java.util.ArrayList;

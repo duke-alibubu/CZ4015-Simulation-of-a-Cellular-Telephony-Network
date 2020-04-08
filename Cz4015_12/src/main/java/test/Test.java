@@ -2,9 +2,6 @@ package test;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
-import main.init.StationListContainer;
-import utils.enums.FCAScheme;
-import utils.generators.InitialPositionGenerator;
 
 import java.io.FileReader;
 import java.util.List;

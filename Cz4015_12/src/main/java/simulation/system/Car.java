@@ -1,6 +1,6 @@
-package main.system;
+package simulation.system;
 
-import main.init.StationListContainer;
+import simulation.init.StationListContainer;
 import utils.enums.Direction;
 import utils.generators.DirectionGenerator;
 
