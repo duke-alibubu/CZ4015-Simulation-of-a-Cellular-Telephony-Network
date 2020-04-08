@@ -32,4 +32,28 @@ public class Call {
                 ", initialPosition=" + initialPosition +
                 '}';
     }
+
+    public double getArrivalTime() {
+        return arrivalTime;
+    }
+
+    public int getBaseStation() {
+        return baseStation;
+    }
+
+    public double getCallDuration() {
+        return callDuration;
+    }
+
+    public double getVelocity() {
+        return velocity;
+    }
+
+    public Direction getDirection() {
+        return direction;
+    }
+
+    public int getInitialPosition() {
+        return initialPosition;
+    }
 }
