@@ -4,7 +4,7 @@ import simulation.init.StationListContainer;
 import utils.enums.Direction;
 import utils.generators.DirectionGenerator;
 
-public class Car {
+public class Call {
     private double arrivalTime;
     private int baseStation;
     private double callDuration;
@@ -12,7 +12,7 @@ public class Car {
     private Direction direction;
     private int initialPosition;
 
-    public Car(double arrivalTime, int baseStation, double callDuration, double velocity) {
+    public Call(double arrivalTime, int baseStation, double callDuration, double velocity) {
         this.arrivalTime = arrivalTime;
         this.baseStation = baseStation;
         this.callDuration = callDuration;
