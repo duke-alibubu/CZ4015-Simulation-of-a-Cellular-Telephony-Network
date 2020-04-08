@@ -3,8 +3,8 @@ package simulation.system;
 import utils.generators.InitialPositionGenerator;
 
 public class Station {
-    private int numAvailableFreeChannels;
-    private int numChannelsReservedForHandover;
+    public int numAvailableFreeChannels;
+    public int numChannelsReservedForHandover;
     private int maxChannelsReservedForHandover;
     private InitialPositionGenerator initialPositionGenerator;      //each station has its own initial position generator
 
@@ -18,14 +18,6 @@ public class Station {
 
     public int generateInitialPositionWithinThisStation(){
         return initialPositionGenerator.generateInitialPosition();
-    }
-
-    public int getNumAvailableFreeChannels() {
-        return numAvailableFreeChannels;
-    }
-
-    public int getNumChannelsReservedForHandover() {
-        return numChannelsReservedForHandover;
     }
 
     public int getMaxChannelsReservedForHandover() {
