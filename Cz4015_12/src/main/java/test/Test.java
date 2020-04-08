@@ -1,8 +1,6 @@
 package test;
 
-import utils.Direction;
-import utils.DirectionGenerator;
-import utils.InitialPositionGenerator;
+import generators.InitialPositionGenerator;
 
 public class Test {
     public static void main(String[] args){

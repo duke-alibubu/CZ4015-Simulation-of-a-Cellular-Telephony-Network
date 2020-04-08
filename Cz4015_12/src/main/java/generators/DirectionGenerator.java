@@ -1,4 +1,6 @@
-package utils;
+package generators;
+
+import enums.Direction;
 
 import java.util.Random;
 
