@@ -1,10 +1,10 @@
 package test;
 
-import generator.controller.GeneratorController;
+import utils.DirectionGenerator;
 
 public class Test {
     public static void main(String[] args){
-        GeneratorController generatorController = new GeneratorController();
-        System.out.println(generatorController.generateCarDirection());
+        for (int i = 0; i < 10; i++)
+            System.out.println(DirectionGenerator.generateDirection());
     }
 }
