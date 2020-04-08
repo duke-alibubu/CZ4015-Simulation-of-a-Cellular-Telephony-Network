@@ -1,4 +1,5 @@
 package simulation.events;
 
-public class CallInitiationEvent {
+public class CallInitiationEvent extends CallEventInterface {
+
 }

@@ -1,4 +1,4 @@
 package simulation.events;
 
-public class CallTerminationEvent {
+public class CallTerminationEvent extends CallEventInterface{
 }
