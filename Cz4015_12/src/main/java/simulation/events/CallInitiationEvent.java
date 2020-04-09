@@ -11,10 +11,10 @@ public class CallInitiationEvent extends CallEventAbstractClass {
     public CallInitiationEvent (Call call, double procTime){
         this.call = call;
         this.procTime = procTime;
-        MainProcess.simulationClock = procTime;
     }
 
     public void execute() {
+        MainProcess.simulationClock = procTime;
         Station station = StationListContainer.getStationList().get(call.baseStation - 1);
         if (station.numAvailableFreeChannels == 0){
             MainProcess.numBlocked++;

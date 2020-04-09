@@ -14,10 +14,10 @@ public class CallHandoverEvent extends CallEventAbstractClass{
         this.call = call;
         this.timeSpent = timeSpent;
         this.procTime = procTime;
-        MainProcess.simulationClock = procTime;
     }
 
     public void execute() {
+        MainProcess.simulationClock = procTime;
         call.callDuration -= timeSpent;
 
         Station previousStation = StationListContainer.getStationList().get(call.baseStation - 1);
