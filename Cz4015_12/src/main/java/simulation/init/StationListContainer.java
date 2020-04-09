@@ -22,6 +22,38 @@ public class StationListContainer {
                 numAvailableFreeChannels = 9;
                 numChannelsReservedForHandover = 1;
                 break;
+            case Two_Channel_Reversed_For_Handovers:
+                numAvailableFreeChannels = 8;
+                numChannelsReservedForHandover = 2;
+                break;
+            case Three_Channel_Reversed_For_Handovers:
+                numAvailableFreeChannels = 7;
+                numChannelsReservedForHandover = 3;
+                break;
+            case Four_Channel_Reversed_For_Handovers:
+                numAvailableFreeChannels = 6;
+                numChannelsReservedForHandover = 4;
+                break;
+            case Five_Channel_Reversed_For_Handovers:
+                numAvailableFreeChannels = 5;
+                numChannelsReservedForHandover = 5;
+                break;
+            case Six_Channel_Reversed_For_Handovers:
+                numAvailableFreeChannels = 4;
+                numChannelsReservedForHandover = 6;
+                break;
+            case Seven_Channel_Reversed_For_Handovers:
+                numAvailableFreeChannels = 3;
+                numChannelsReservedForHandover = 7;
+                break;
+            case Eight_Channel_Reversed_For_Handovers:
+                numAvailableFreeChannels = 2;
+                numChannelsReservedForHandover = 8;
+                break;
+            case Nine_Channel_Reversed_For_Handovers:
+                numAvailableFreeChannels = 1;
+                numChannelsReservedForHandover = 9;
+                break;
             default:
                 break;
         }
