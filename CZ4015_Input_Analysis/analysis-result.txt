@@ -1,0 +1,8 @@
+- VELOCITY:
+Normal distribution with mean 120.07209801685764 and variance 81.3352710250803
+- BASE STATION:
+Uniform distribution from 1 to 20
+- INTERARRIVAL TIME:
+Exponential distribution with mean 1.3698169264765245
+- CALL DURATION:
+Exponential distribution for call duration - 10 with mean 99.8359007387477
