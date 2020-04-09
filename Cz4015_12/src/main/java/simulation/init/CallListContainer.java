@@ -3,6 +3,10 @@ package simulation.init;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import simulation.system.Call;
+import utils.generators.ArrivalTimeGenerator;
+import utils.generators.BaseStationGenerator;
+import utils.generators.CallDurationGenerator;
+import utils.generators.VelocityGenerator;
 
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -13,10 +17,6 @@ public class CallListContainer {
     private final static String FILE_PATH = "D:/My Folder/Academic/Year 3 Sem 2/CZ4015 Simulation & Modeling/Assignment/Cz4015_12/src/main/resources/PCS_TEST_DETERMINSTIC_19S2.csv";
     private final static int NUMBER_OF_CALLS = 250000;
     private static List<Call> callList;
-    private Random arrivalTimeGenerator;
-    private Random baseStationGenerator;
-    private Random callDurationGenerator;
-    private Random velocityGenerator;
 
     public CallListContainer(boolean isAutoGenerate){
         if (!isAutoGenerate){
@@ -25,10 +25,6 @@ public class CallListContainer {
         }
         else {
             callList = new ArrayList<Call>(NUMBER_OF_CALLS);
-            arrivalTimeGenerator = new Random();
-            baseStationGenerator = new Random();
-            callDurationGenerator = new Random();
-            velocityGenerator = new Random();
             generateCallList();
         }
     }
@@ -64,7 +60,11 @@ public class CallListContainer {
 
     private void generateCallList(){
         for (int i = 0; i < NUMBER_OF_CALLS; i++){
-            callList.add(new Call(arrivalTimeGenerator.nextDouble() * 100000, baseStationGenerator.nextInt(20) + 1, callDurationGenerator.nextDouble() * 180, velocityGenerator.nextDouble() * 130));
+            double arrivalTime = ArrivalTimeGenerator.generateArrivalTime();
+            int baseStation = BaseStationGenerator.generateBaseStation();
+            double callDuration = CallDurationGenerator.generateCallDuration();
+            double velocity = VelocityGenerator.generateVelocity();
+            callList.add(new Call(arrivalTime, baseStation, callDuration, velocity));
         }
     }
 }

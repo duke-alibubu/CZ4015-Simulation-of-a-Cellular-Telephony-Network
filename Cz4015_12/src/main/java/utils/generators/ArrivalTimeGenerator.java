@@ -13,7 +13,7 @@ public class ArrivalTimeGenerator {
         double u = rand.nextDouble();
         return -Math.log(1 - u) * MEAN;
     }
-    public double generateArrivalTime(){
+    public static double generateArrivalTime(){
         if (isFirstTime){
             isFirstTime = false;
             return 0;
