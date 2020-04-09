@@ -66,6 +66,5 @@ public class CallListContainer {
         for (int i = 0; i < NUMBER_OF_CALLS; i++){
             callList.add(new Call(arrivalTimeGenerator.nextDouble() * 100000, baseStationGenerator.nextInt(20) + 1, callDurationGenerator.nextDouble() * 180, velocityGenerator.nextDouble() * 130));
         }
-        System.out.println(callList.toString());
     }
 }

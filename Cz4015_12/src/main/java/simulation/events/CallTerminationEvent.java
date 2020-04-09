@@ -8,9 +8,11 @@ import simulation.system.Station;
 public class CallTerminationEvent extends CallEventAbstractClass{
     private Call call;
     private double timeSpent;
-    public CallTerminationEvent (Call call, double timeSpent){
+    public CallTerminationEvent (Call call, double timeSpent, double procTime){
         this.call = call;
         this.timeSpent = timeSpent;
+        this.procTime = procTime;
+        MainProcess.simulationClock = procTime;
     }
 
     public void execute() {

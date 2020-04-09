@@ -10,9 +10,11 @@ import utils.enums.Direction;
 public class CallHandoverEvent extends CallEventAbstractClass{
     private Call call;
     private double timeSpent;
-    public CallHandoverEvent (Call call, double timeSpent){
+    public CallHandoverEvent (Call call, double timeSpent, double procTime){
         this.call = call;
         this.timeSpent = timeSpent;
+        this.procTime = procTime;
+        MainProcess.simulationClock = procTime;
     }
 
     public void execute() {
@@ -46,13 +48,16 @@ public class CallHandoverEvent extends CallEventAbstractClass{
 
         if (call.callDuration <= maxCallTime){
             //FutureEventList.add(new CallTerminationEvent(car, car.CallDuration), simulationClock + car.CallDuration);
+            MainProcess.futureEventList.add(new CallTerminationEvent(call, call.callDuration, MainProcess.simulationClock + call.callDuration));
         }
         else {
             if ((call.getDirection() == Direction.Left && call.baseStation == 20) || (call.getDirection() == Direction.Right && call.baseStation == 0)){
                 //FutureEventList.add(new CallTerminationEvent(car, max_call_time), simulationClock + max_call_time);
+                MainProcess.futureEventList.add(new CallTerminationEvent(call, maxCallTime, MainProcess.simulationClock + maxCallTime));
             }
             else {
                 //FutureEventList.add(new CallHandoverEvent(car, max_call_time), simulationClock + max_call_time);
+                MainProcess.futureEventList.add(new CallHandoverEvent(call, maxCallTime, MainProcess.simulationClock + maxCallTime));
             }
         }
     }
