@@ -17,7 +17,7 @@ public class MainProcess {
     public static PriorityQueue<CallEventAbstractClass> futureEventList = new PriorityQueue<CallEventAbstractClass>();
     public static void main(String[] args){
         StationListContainer stationListContainer = new StationListContainer(FCAScheme.One_Channel_Reversed_For_Handovers);
-        CallListContainer callListContainer = new CallListContainer(false);
+        CallListContainer callListContainer = new CallListContainer(true);
         for (Call call: callListContainer.getCallList()){
             futureEventList.add(new CallInitiationEvent(call, call.getArrivalTime()));
         }

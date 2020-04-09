@@ -33,7 +33,7 @@ public class CallInitiationEvent extends CallEventAbstractClass {
                 MainProcess.futureEventList.add(new CallTerminationEvent(call, call.callDuration, MainProcess.simulationClock + call.callDuration));
             }
             else {
-                if ((call.getDirection() == Direction.Left && call.baseStation == 20) || (call.getDirection() == Direction.Right && call.baseStation == 0)){
+                if ((call.getDirection() == Direction.Left && call.baseStation == 20) || (call.getDirection() == Direction.Right && call.baseStation == 1)){
                     //FutureEventList.add(new CallTerminationEvent(car, max_call_time), simulationClock + max_call_time);
                     MainProcess.futureEventList.add(new CallTerminationEvent(call, maxCallTime, MainProcess.simulationClock + maxCallTime));
                 }
