@@ -25,8 +25,8 @@ public class MainProcess {
             CallEventAbstractClass nextEvent = futureEventList.poll();
             nextEvent.execute();
         }
-        System.out.println(numDropped);
-        System.out.println(numBlocked);
-        System.out.println(numTotal);
+
+        System.out.println("Dropped Rate: " + (double)numDropped  * 100/ (double)numTotal + " %");
+        System.out.println("Blocked Rate: " + (double)numBlocked * 100/ (double)numTotal + " %");
     }
 }
