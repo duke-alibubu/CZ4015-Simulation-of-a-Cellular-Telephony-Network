@@ -6,7 +6,7 @@ import simulation.system.Call;
 import simulation.system.Station;
 import utils.enums.Direction;
 
-public class CallInitiationEvent implements CallEventInterface {
+public class CallInitiationEvent extends CallEventAbstractClass {
     private Call call;
     public CallInitiationEvent (Call call){
         this.call = call;

@@ -7,7 +7,7 @@ import simulation.system.Call;
 import simulation.system.Station;
 import utils.enums.Direction;
 
-public class CallHandoverEvent implements CallEventInterface{
+public class CallHandoverEvent extends CallEventAbstractClass{
     private Call call;
     private double timeSpent;
     public CallHandoverEvent (Call call, double timeSpent){

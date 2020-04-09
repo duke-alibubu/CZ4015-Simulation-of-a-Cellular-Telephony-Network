@@ -5,7 +5,7 @@ import simulation.init.StationListContainer;
 import simulation.system.Call;
 import simulation.system.Station;
 
-public class CallTerminationEvent implements CallEventInterface{
+public class CallTerminationEvent extends CallEventAbstractClass{
     private Call call;
     private double timeSpent;
     public CallTerminationEvent (Call call, double timeSpent){
