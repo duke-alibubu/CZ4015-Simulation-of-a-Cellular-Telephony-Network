@@ -14,6 +14,8 @@ public class MyCSVWriter {
         outputFilePath = OUTPUT_BASE_PATH + "/" + fileName + ".csv";
         try {
             writer = new CSVWriter(new FileWriter(new File(outputFilePath)));
+            String[] firstLine = {"Dropped Rate", "Blocked Rate", "Number of Calls"};
+            writer.writeNext(firstLine);
         }
         catch (Exception e){
             System.out.println("Cannot create CSV Writer!");
@@ -21,8 +23,8 @@ public class MyCSVWriter {
 
     }
 
-    public void writeDataToCSV(double droppedPercentage, double blockedPercentage, double time){
-        String[] data = {String.valueOf(droppedPercentage), String.valueOf(blockedPercentage), String.valueOf(time)};
+    public void writeDataToCSV(double droppedPercentage, double blockedPercentage, int numTotal){
+        String[] data = {String.valueOf(droppedPercentage), String.valueOf(blockedPercentage), String.valueOf(numTotal)};
         writer.writeNext(data);
     }
 

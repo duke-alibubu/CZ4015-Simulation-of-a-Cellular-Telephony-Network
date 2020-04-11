@@ -19,7 +19,7 @@ public class MainProcess {
     public static PriorityQueue<CallEventAbstractClass> futureEventList = new PriorityQueue<CallEventAbstractClass>();
     private static MyCSVWriter myCSVWriter;
     public static void main(String[] args){
-        StationListContainer stationListContainer = new StationListContainer(FCAScheme.Nine_Channel_Reversed_For_Handovers);
+        StationListContainer stationListContainer = new StationListContainer(FCAScheme.Five_Channel_Reversed_For_Handovers);
         myCSVWriter = new MyCSVWriter(StationListContainer.getFCASchemeName());
         CallListContainer callListContainer = new CallListContainer(true);
         for (Call call: callListContainer.getCallList()){
@@ -37,6 +37,6 @@ public class MainProcess {
     }
 
     public static void updateCSVOutput(){
-        myCSVWriter.writeDataToCSV(OutputCalculator.calculateOutPutPercentage(numDropped, numTotal), OutputCalculator.calculateOutPutPercentage(numBlocked, numTotal), simulationClock);
+        myCSVWriter.writeDataToCSV(OutputCalculator.calculateOutPutPercentage(numDropped, numTotal), OutputCalculator.calculateOutPutPercentage(numBlocked, numTotal), numTotal);
     }
 }
