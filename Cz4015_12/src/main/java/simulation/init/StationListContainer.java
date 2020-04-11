@@ -12,7 +12,10 @@ public class StationListContainer {
 
     private int numAvailableFreeChannels;
     private int numChannelsReservedForHandover;
+    private static FCAScheme fcascheme;
+
     public StationListContainer(FCAScheme fcaScheme){
+        fcascheme = fcaScheme;
         switch (fcaScheme){
             case No_Channel_Reservation:
                 numAvailableFreeChannels = 10;
@@ -65,5 +68,8 @@ public class StationListContainer {
 
     public static List<Station> getStationList() {
         return stationList;
+    }
+    public static String getFCASchemeName(){
+        return fcascheme.name();
     }
 }

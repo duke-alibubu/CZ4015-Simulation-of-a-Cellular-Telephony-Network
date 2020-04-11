@@ -26,7 +26,6 @@ public class MainProcess {
             nextEvent.execute();
         }
 
-        for
         System.out.println("Dropped Rate: " + (double)numDropped  * 100/ (double)numTotal + " %");
         System.out.println("Blocked Rate: " + (double)numBlocked * 100/ (double)numTotal + " %");
     }
