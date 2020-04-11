@@ -17,14 +17,15 @@ mean = inter_arrival_time_series.mean()
 # deviation = math.sqrt(var)
 
 a = [0]
-p_j = 1/100
-for i in range(1,100):
+k = 100
+p_j = 1/k
+for i in range(1,k):
     a.append(mean * np.log(1/ (1 - i*p_j)))
 a.append(math.inf)
 n = len(inter_arrival_time_series)
 
 chi_square_err = 0
-for i in range(100):
+for i in range(k):
     N_i = list(inter_arrival_time_series.apply(lambda value: a[i]<=value<a[i+1])).count(True)
     chi_square_err += (N_i-n*p_j)**2/(n*p_j)
 

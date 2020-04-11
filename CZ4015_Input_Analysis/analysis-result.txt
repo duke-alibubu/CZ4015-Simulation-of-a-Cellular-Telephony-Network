@@ -1,8 +1,10 @@
 - VELOCITY:
-Normal distribution with mean 120.07209801685764 and variance 81.3352710250803
+Normal distribution with mean 120.07209801685764 and variance 81.3352710250803. Chi-square Test error 96.44
 - BASE STATION:
-Uniform distribution from 1 to 20
+Uniform distribution from 1 to 20. Test err = 25.656
 - INTERARRIVAL TIME:
-Exponential distribution with mean 1.3698169264765245
+Exponential distribution with mean 1.3698169264765245. Chi-square test err 111.66106610661065
 - CALL DURATION:
-Exponential distribution for call duration - 10 with mean 99.8359007387477
+Exponential distribution for call duration - 10 with mean 99.8359007387477. Chi-square test err 95.91999999999999
+Without -10: mean = 109.8359007387477
+test err = 1110.2800000000002

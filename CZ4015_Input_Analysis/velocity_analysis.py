@@ -12,15 +12,16 @@ var = ((velocity-mean)**2).sum()/len(velocity)
 deviation = math.sqrt(var)
 
 a = [0]
-p_j = 1/100
-for i in range(1,100):
+k = 100
+p_j = 1/k
+for i in range(1,k):
     a.append(norm.ppf(i*p_j, loc=mean, scale=deviation))
 a.append(math.inf)
 
 n = len(velocity)
 
 chi_square_err = 0
-for i in range(100):
+for i in range(k):
     N_i = list(velocity.apply(lambda value: a[i]<=value<a[i+1])).count(True)
     chi_square_err += (N_i-n*p_j)**2/(n*p_j)
 
