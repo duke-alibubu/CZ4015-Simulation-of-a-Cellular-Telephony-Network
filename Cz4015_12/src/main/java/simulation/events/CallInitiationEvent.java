@@ -19,6 +19,7 @@ public class CallInitiationEvent extends CallEventAbstractClass {
         if (station.numAvailableFreeChannels == 0){
             MainProcess.numBlocked++;
             MainProcess.numTotal++;
+            MainProcess.updateCSVOutput();
         }
         else {
             double maxCallTime;

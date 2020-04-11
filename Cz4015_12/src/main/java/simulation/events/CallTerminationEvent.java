@@ -24,5 +24,6 @@ public class CallTerminationEvent extends CallEventAbstractClass{
             previousStation.numAvailableFreeChannels++;
 
         MainProcess.numTotal++;
+        MainProcess.updateCSVOutput();
     }
 }

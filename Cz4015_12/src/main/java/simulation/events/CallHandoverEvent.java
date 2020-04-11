@@ -36,6 +36,7 @@ public class CallHandoverEvent extends CallEventAbstractClass{
             if (thisStation.numChannelsReservedForHandover == 0){
                 MainProcess.numDropped++;
                 MainProcess.numTotal++;
+                MainProcess.updateCSVOutput();
                 return;
             }
             else
