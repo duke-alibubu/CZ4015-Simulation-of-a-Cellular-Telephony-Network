@@ -5,6 +5,7 @@ import simulation.events.CallInitiationEvent;
 import simulation.init.CallListContainer;
 import simulation.init.StationListContainer;
 import simulation.system.Call;
+import utils.calculators.OutputCalculator;
 import utils.enums.FCAScheme;
 
 import java.util.PriorityQueue;
@@ -26,7 +27,7 @@ public class MainProcess {
             nextEvent.execute();
         }
 
-        System.out.println("Dropped Rate: " + (double)numDropped  * 100/ (double)numTotal + " %");
-        System.out.println("Blocked Rate: " + (double)numBlocked * 100/ (double)numTotal + " %");
+        System.out.println("Dropped Rate: " + OutputCalculator.calculateOutPutPercentage(numDropped, numTotal) + " %");
+        System.out.println("Blocked Rate: " +OutputCalculator.calculateOutPutPercentage(numBlocked, numTotal) + " %");
     }
 }
