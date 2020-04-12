@@ -13,8 +13,6 @@ for i in range (1, arrival_time.shape[0]):
 inter_arrival_time_series = pd.Series(inter_arrival_time)
 
 mean = inter_arrival_time_series.mean()
-# var = ((velocity-mean)**2).sum()/len(velocity)
-# deviation = math.sqrt(var)
 
 a = [0]
 k = 100
