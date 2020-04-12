@@ -22,24 +22,32 @@ public class MainProcess {
     public static int numTotalAfterWarmUp = 0;
     public static int numDroppedAfterWarmUp = 0;
     public static int numBlockedAfterWarmUp = 0;
+    private static MyCSVWriter outputAnalysisWriter;
+    private static int numberOfRun = 200;
     public static void main(String[] args){
-        StationListContainer stationListContainer = new StationListContainer(FCAScheme.One_Channel_Reversed_For_Handovers);
-        myCSVWriter = new MyCSVWriter(StationListContainer.getFCASchemeName());
-        CallListContainer callListContainer = new CallListContainer(true);
-        for (Call call: callListContainer.getCallList()){
-            futureEventList.add(new CallInitiationEvent(call, call.getArrivalTime()));
-        }
-        while (!futureEventList.isEmpty()){
-            CallEventAbstractClass nextEvent = futureEventList.poll();
-            nextEvent.execute();
-        }
-        System.out.println("Final Result: ");
-        System.out.println("Dropped Rate: " + OutputCalculator.calculateOutPutPercentage(numDropped, numTotal) + " %");
-        System.out.println("Blocked Rate: " +OutputCalculator.calculateOutPutPercentage(numBlocked, numTotal) + " %");
+        outputAnalysisWriter = new MyCSVWriter(String.valueOf(numberOfRun) + "_Run");
 
-        System.out.println("Dropped Rate: " + OutputCalculator.calculateOutPutPercentage(numDroppedAfterWarmUp, numTotalAfterWarmUp) + " %");
-        System.out.println("Blocked Rate: " +OutputCalculator.calculateOutPutPercentage(numBlockedAfterWarmUp, numTotalAfterWarmUp) + " %");
-        myCSVWriter.closeCSVWriter();
+        for (int i = 0; i < numberOfRun; i++){
+            StationListContainer stationListContainer = new StationListContainer(FCAScheme.One_Channel_Reversed_For_Handovers);
+            CallListContainer callListContainer = new CallListContainer(true);
+            myCSVWriter = new MyCSVWriter(StationListContainer.getFCASchemeName(), "Full_run");
+            for (Call call: callListContainer.getCallList()){
+                futureEventList.add(new CallInitiationEvent(call, call.getArrivalTime()));
+            }
+            while (!futureEventList.isEmpty()){
+                CallEventAbstractClass nextEvent = futureEventList.poll();
+                nextEvent.execute();
+            }
+//        System.out.println("Final Result: ");
+//        System.out.println("Dropped Rate: " + OutputCalculator.calculateOutPutPercentage(numDropped, numTotal) + " %");
+//        System.out.println("Blocked Rate: " +OutputCalculator.calculateOutPutPercentage(numBlocked, numTotal) + " %");
+//
+//        System.out.println("Dropped Rate: " + OutputCalculator.calculateOutPutPercentage(numDroppedAfterWarmUp, numTotalAfterWarmUp) + " %");
+//        System.out.println("Blocked Rate: " + OutputCalculator.calculateOutPutPercentage(numBlockedAfterWarmUp, numTotalAfterWarmUp) + " %");
+            outputAnalysisWriter.writeDataToCSV(OutputCalculator.calculateOutPutPercentage(numDroppedAfterWarmUp, numTotalAfterWarmUp), OutputCalculator.calculateOutPutPercentage(numBlockedAfterWarmUp, numTotalAfterWarmUp));
+            myCSVWriter.closeCSVWriter();
+        }
+        outputAnalysisWriter.closeCSVWriter();
     }
 
     public static void updateCSVOutput(){
