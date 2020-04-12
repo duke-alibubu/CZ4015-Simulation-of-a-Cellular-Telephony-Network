@@ -18,8 +18,12 @@ public class MainProcess {
     public static int numBlocked = 0;
     public static PriorityQueue<CallEventAbstractClass> futureEventList = new PriorityQueue<CallEventAbstractClass>();
     private static MyCSVWriter myCSVWriter;
+    public static int numWarmUpCalls = 100000;
+    public static int numTotalAfterWarmUp = 0;
+    public static int numDroppedAfterWarmUp = 0;
+    public static int numBlockedAfterWarmUp = 0;
     public static void main(String[] args){
-        StationListContainer stationListContainer = new StationListContainer(FCAScheme.Five_Channel_Reversed_For_Handovers);
+        StationListContainer stationListContainer = new StationListContainer(FCAScheme.One_Channel_Reversed_For_Handovers);
         myCSVWriter = new MyCSVWriter(StationListContainer.getFCASchemeName());
         CallListContainer callListContainer = new CallListContainer(true);
         for (Call call: callListContainer.getCallList()){
@@ -33,6 +37,8 @@ public class MainProcess {
         System.out.println("Dropped Rate: " + OutputCalculator.calculateOutPutPercentage(numDropped, numTotal) + " %");
         System.out.println("Blocked Rate: " +OutputCalculator.calculateOutPutPercentage(numBlocked, numTotal) + " %");
 
+        System.out.println("Dropped Rate: " + OutputCalculator.calculateOutPutPercentage(numDroppedAfterWarmUp, numTotalAfterWarmUp) + " %");
+        System.out.println("Blocked Rate: " +OutputCalculator.calculateOutPutPercentage(numBlockedAfterWarmUp, numTotalAfterWarmUp) + " %");
         myCSVWriter.closeCSVWriter();
     }
 

@@ -20,6 +20,14 @@ public class CallInitiationEvent extends CallEventAbstractClass {
             MainProcess.numBlocked++;
             MainProcess.numTotal++;
             MainProcess.updateCSVOutput();
+
+            if (MainProcess.numWarmUpCalls > 0){
+                MainProcess.numWarmUpCalls--;
+            }
+            else {
+                MainProcess.numBlockedAfterWarmUp++;
+                MainProcess.numTotalAfterWarmUp++;
+            }
         }
         else {
             double maxCallTime;

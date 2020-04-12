@@ -37,6 +37,14 @@ public class CallHandoverEvent extends CallEventAbstractClass{
                 MainProcess.numDropped++;
                 MainProcess.numTotal++;
                 MainProcess.updateCSVOutput();
+
+                if (MainProcess.numWarmUpCalls > 0){
+                    MainProcess.numWarmUpCalls--;
+                }
+                else {
+                    MainProcess.numDroppedAfterWarmUp++;
+                    MainProcess.numTotalAfterWarmUp++;
+                }
                 return;
             }
             else
