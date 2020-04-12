@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.FileWriter;
 
 public class MyCSVWriter {
-    private static final String OUTPUT_BASE_PATH = "D:/My Folder/Academic/Year 3 Sem 2/CZ4015 Simulation & Modeling/Assignment/Cz4015_12/src/main/resources/output";
+    private static final String OUTPUT_BASE_PATH = System.getProperty("user.dir") + "/src/main/resources/output/Full_run";
     private String outputFilePath;
     private CSVWriter writer;
 
