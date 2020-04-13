@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CallListContainer {
-    private final static String FILE_PATH = "D:/My Folder/Academic/Year 3 Sem 2/CZ4015 Simulation & Modeling/Assignment/Cz4015_12/src/main/resources/input/PCS_TEST_DETERMINSTIC_19S2.csv";
+    private final static String FILE_PATH = System.getProperty("user.dir") + "/src/main/resources/input/PCS_TEST_DETERMINSTIC_19S2.csv";
     private final static int NUMBER_OF_CALLS = 250000;
     private static List<Call> callList;
 

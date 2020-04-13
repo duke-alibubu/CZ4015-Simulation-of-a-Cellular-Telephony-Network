@@ -28,7 +28,7 @@ public class MainProcess {
         outputAnalysisWriter = new MyCSVWriter(String.valueOf(numberOfRun) + "_Run");
 
         for (int i = 0; i < numberOfRun; i++){
-            StationListContainer stationListContainer = new StationListContainer(FCAScheme.Nine_Channel_Reversed_For_Handovers);
+            StationListContainer stationListContainer = new StationListContainer(FCAScheme.One_Channel_Reversed_For_Handovers);
             CallListContainer callListContainer = new CallListContainer(true);
             myCSVWriter = new MyCSVWriter(StationListContainer.getFCASchemeName(), "Full_run");
             for (Call call: callListContainer.getCallList()){
