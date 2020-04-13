@@ -1,7 +1,7 @@
 package simulation.events;
 
 import simulation.MainProcess;
-import simulation.init.StationListContainer;
+import simulation.containers.StationListContainer;
 import simulation.system.Call;
 import simulation.system.Station;
 

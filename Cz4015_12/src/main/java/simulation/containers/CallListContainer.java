@@ -1,4 +1,4 @@
-package simulation.init;
+package simulation.containers;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;

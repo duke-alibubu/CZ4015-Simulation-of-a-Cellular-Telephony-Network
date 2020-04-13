@@ -1,4 +1,4 @@
-package simulation.init;
+package simulation.containers;
 
 import simulation.system.Station;
 import utils.enums.FCAScheme;

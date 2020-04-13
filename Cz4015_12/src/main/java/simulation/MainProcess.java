@@ -2,8 +2,8 @@ package simulation;
 
 import simulation.events.CallEventAbstractClass;
 import simulation.events.CallInitiationEvent;
-import simulation.init.CallListContainer;
-import simulation.init.StationListContainer;
+import simulation.containers.CallListContainer;
+import simulation.containers.StationListContainer;
 import simulation.system.Call;
 import utils.calculators.OutputCalculator;
 import utils.enums.FCAScheme;
@@ -28,7 +28,7 @@ public class MainProcess {
         outputAnalysisWriter = new MyCSVWriter(String.valueOf(numberOfRun) + "_Run");
 
         for (int i = 0; i < numberOfRun; i++){
-            StationListContainer stationListContainer = new StationListContainer(FCAScheme.One_Channel_Reversed_For_Handovers);
+            StationListContainer stationListContainer = new StationListContainer(FCAScheme.Nine_Channel_Reversed_For_Handovers);
             CallListContainer callListContainer = new CallListContainer(true);
             myCSVWriter = new MyCSVWriter(StationListContainer.getFCASchemeName(), "Full_run");
             for (Call call: callListContainer.getCallList()){
@@ -38,12 +38,7 @@ public class MainProcess {
                 CallEventAbstractClass nextEvent = futureEventList.poll();
                 nextEvent.execute();
             }
-//        System.out.println("Final Result: ");
-//        System.out.println("Dropped Rate: " + OutputCalculator.calculateOutPutPercentage(numDropped, numTotal) + " %");
-//        System.out.println("Blocked Rate: " +OutputCalculator.calculateOutPutPercentage(numBlocked, numTotal) + " %");
-//
-//        System.out.println("Dropped Rate: " + OutputCalculator.calculateOutPutPercentage(numDroppedAfterWarmUp, numTotalAfterWarmUp) + " %");
-//        System.out.println("Blocked Rate: " + OutputCalculator.calculateOutPutPercentage(numBlockedAfterWarmUp, numTotalAfterWarmUp) + " %");
+
             outputAnalysisWriter.writeDataToCSV(OutputCalculator.calculateOutPutPercentage(numDroppedAfterWarmUp, numTotalAfterWarmUp), OutputCalculator.calculateOutPutPercentage(numBlockedAfterWarmUp, numTotalAfterWarmUp));
             myCSVWriter.closeCSVWriter();
         }
