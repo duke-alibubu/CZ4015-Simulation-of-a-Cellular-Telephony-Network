@@ -15,7 +15,7 @@ import java.util.List;
 public class CallListContainer {
     private final static String FILE_PATH = System.getProperty("user.dir") + "/src/main/resources/input/PCS_TEST_DETERMINSTIC_19S2.csv";
     private final static int NUMBER_OF_CALLS = 250000;
-    private static List<Call> callList;
+    private List<Call> callList;
 
     public CallListContainer(boolean isAutoGenerate){
         if (!isAutoGenerate){
@@ -28,7 +28,7 @@ public class CallListContainer {
         }
     }
 
-    public static List<Call> getCallList() {
+    public List<Call> getCallList() {
         return callList;
     }
     private void loadCallDataFromCSVFile(){

@@ -28,7 +28,8 @@ public class MainProcess {
         outputAnalysisWriter = new MyCSVWriter(String.valueOf(numberOfRun) + "_Run");
 
         for (int i = 0; i < numberOfRun; i++){
-            StationListContainer stationListContainer = new StationListContainer(FCAScheme.One_Channel_Reversed_For_Handovers);
+            resetSystemCount();
+            StationListContainer stationListContainer = new StationListContainer(FCAScheme.No_Channel_Reservation);
             CallListContainer callListContainer = new CallListContainer(true);
             myCSVWriter = new MyCSVWriter(StationListContainer.getFCASchemeName(), "Full_run");
             for (Call call: callListContainer.getCallList()){
@@ -47,5 +48,14 @@ public class MainProcess {
 
     public static void updateCSVOutput(){
         myCSVWriter.writeDataToCSV(OutputCalculator.calculateOutPutPercentage(numDropped, numTotal), OutputCalculator.calculateOutPutPercentage(numBlocked, numTotal), numTotal);
+    }
+
+    public static void resetSystemCount(){
+        numTotal = 0;
+        numTotalAfterWarmUp = 0;
+        numDropped = 0;
+        numDroppedAfterWarmUp = 0;
+        numBlocked = 0;
+        numBlockedAfterWarmUp = 0;
     }
 }
