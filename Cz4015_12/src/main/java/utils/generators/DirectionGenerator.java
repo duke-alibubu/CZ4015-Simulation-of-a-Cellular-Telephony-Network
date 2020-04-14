@@ -6,9 +6,12 @@ import java.util.Random;
 
 public class DirectionGenerator {
     //let the RNG to be static since all the directions follow an equal probability
-    private static Random rand = new Random();
+    private Random rand;
 
-    public static Direction generateDirection(){
+    public DirectionGenerator(){
+        rand = new Random();
+    }
+    public Direction generateDirection(){
         boolean randomValue = rand.nextBoolean();
         if (randomValue)
             return Direction.Left;

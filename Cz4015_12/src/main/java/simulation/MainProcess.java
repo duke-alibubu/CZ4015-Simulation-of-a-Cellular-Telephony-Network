@@ -23,7 +23,7 @@ public class MainProcess {
     public static int numDroppedAfterWarmUp = 0;
     public static int numBlockedAfterWarmUp = 0;
     private static MyCSVWriter outputAnalysisWriter;
-    private static int numberOfRun = 200;
+    private static int numberOfRun = 1;
     public static void main(String[] args){
         outputAnalysisWriter = new MyCSVWriter(String.valueOf(numberOfRun) + "_Run");
 
@@ -41,6 +41,8 @@ public class MainProcess {
             }
 
             outputAnalysisWriter.writeDataToCSV(OutputCalculator.calculateOutPutPercentage(numDroppedAfterWarmUp, numTotalAfterWarmUp), OutputCalculator.calculateOutPutPercentage(numBlockedAfterWarmUp, numTotalAfterWarmUp));
+            System.out.println(OutputCalculator.calculateOutPutPercentage(numDroppedAfterWarmUp, numTotalAfterWarmUp));
+            System.out.println(OutputCalculator.calculateOutPutPercentage(numBlockedAfterWarmUp, numTotalAfterWarmUp));
             myCSVWriter.closeCSVWriter();
         }
         outputAnalysisWriter.closeCSVWriter();
@@ -51,11 +53,13 @@ public class MainProcess {
     }
 
     public static void resetSystemCount(){
+        numWarmUpCalls = 100000;
         numTotal = 0;
         numTotalAfterWarmUp = 0;
         numDropped = 0;
         numDroppedAfterWarmUp = 0;
         numBlocked = 0;
         numBlockedAfterWarmUp = 0;
+        simulationClock = 0;
     }
 }
