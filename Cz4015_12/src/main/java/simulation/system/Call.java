@@ -2,7 +2,6 @@ package simulation.system;
 
 import simulation.containers.StationListContainer;
 import utils.enums.Direction;
-import utils.generators.DirectionGenerator;
 
 public class Call {
     private double arrivalTime;
@@ -14,12 +13,12 @@ public class Call {
     //initial position with respect to the leftmost border of the station
     private int initialPosition;
 
-    public Call(double arrivalTime, int baseStation, double callDuration, double velocity) {
+    public Call(double arrivalTime, int baseStation, double callDuration, double velocity, Direction direction) {
         this.arrivalTime = arrivalTime;
         this.baseStation = baseStation;
         this.callDuration = callDuration;
         this.velocity = velocity;
-        this.direction = DirectionGenerator.generateDirection();
+        this.direction = direction;
         this.initialPosition = StationListContainer.getStationList().get(baseStation-1).generateInitialPositionWithinThisStation();
     }
 

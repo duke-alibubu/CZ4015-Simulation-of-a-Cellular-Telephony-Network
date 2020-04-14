@@ -2,7 +2,9 @@ package simulation.containers;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
+import simulation.MainProcess;
 import simulation.system.Call;
+import utils.enums.Direction;
 import utils.generators.ArrivalTimeGenerator;
 import utils.generators.BaseStationGenerator;
 import utils.generators.CallDurationGenerator;
@@ -48,7 +50,8 @@ public class CallListContainer {
                 int baseStation = Integer.parseInt(row[2]);
                 double callDuration = Double.parseDouble(row[3]);
                 double velocity = Double.parseDouble(row[4]);
-                Call call = new Call(arrivalTime, baseStation, callDuration, velocity);
+                Direction direction = MainProcess.directionGenerator.generateDirection();
+                Call call = new Call(arrivalTime, baseStation, callDuration, velocity, direction);
                 callList.add(call);
             }
         }
@@ -59,11 +62,12 @@ public class CallListContainer {
 
     private void generateCallList(){
         for (int i = 0; i < NUMBER_OF_CALLS; i++){
-            double arrivalTime = ArrivalTimeGenerator.generateArrivalTime();
-            int baseStation = BaseStationGenerator.generateBaseStation();
-            double callDuration = CallDurationGenerator.generateCallDuration();
-            double velocity = VelocityGenerator.generateVelocity();
-            callList.add(new Call(arrivalTime, baseStation, callDuration, velocity));
+            double arrivalTime = MainProcess.arrivalTimeGenerator.generateArrivalTime();
+            int baseStation = MainProcess.baseStationGenerator.generateBaseStation();
+            double callDuration = MainProcess.callDurationGenerator.generateCallDuration();
+            double velocity = MainProcess.velocityGenerator.generateVelocity();
+            Direction direction = MainProcess.directionGenerator.generateDirection();
+            callList.add(new Call(arrivalTime, baseStation, callDuration, velocity, direction));
         }
     }
 }
