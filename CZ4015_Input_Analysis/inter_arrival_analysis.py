@@ -7,7 +7,7 @@ import numpy as np
 data = pd.read_excel("PCS_TEST_DETERMINSTIC_19S2.xls")
 arrival_time = data["Arrival time (sec)"]
 inter_arrival_time = []
-for i in range (1, arrival_time.shape[0]):
+for i in range (1, arrival_time.shape[0] + 1):
     inter_arrival_time.append(arrival_time[i] - arrival_time[i-1])
 
 inter_arrival_time_series = pd.Series(inter_arrival_time)
