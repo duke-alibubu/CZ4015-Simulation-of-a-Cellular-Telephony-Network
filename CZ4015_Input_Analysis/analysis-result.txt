@@ -5,6 +5,6 @@ Uniform distribution from 1 to 20. Test err = 25.656
 - INTERARRIVAL TIME:
 Exponential distribution with mean 1.3698169264765245. Chi-square test err 111.66106610661065
 - CALL DURATION:
-Exponential distribution for call duration - 10 with mean 99.8359007387477. Chi-square test err 95.91999999999999
+Exponential distribution for call duration - 10.003951603252272 with mean 99.83194913549542. Chi-square test err 97.01999999999998
 Without -10: mean = 109.8359007387477
 test err = 1110.2800000000002
