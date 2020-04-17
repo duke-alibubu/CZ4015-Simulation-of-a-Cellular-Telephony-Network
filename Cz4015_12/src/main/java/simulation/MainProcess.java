@@ -6,7 +6,6 @@ import simulation.containers.CallListContainer;
 import simulation.containers.StationListContainer;
 import simulation.system.Call;
 import utils.calculators.OutputCalculator;
-import utils.enums.Direction;
 import utils.enums.FCAScheme;
 import utils.generators.*;
 import utils.writers.MyCSVWriter;
