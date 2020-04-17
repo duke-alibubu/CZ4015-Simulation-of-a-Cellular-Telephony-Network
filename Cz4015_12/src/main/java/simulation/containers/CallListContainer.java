@@ -5,10 +5,6 @@ import com.opencsv.CSVReaderBuilder;
 import simulation.MainProcess;
 import simulation.system.Call;
 import utils.enums.Direction;
-import utils.generators.ArrivalTimeGenerator;
-import utils.generators.BaseStationGenerator;
-import utils.generators.CallDurationGenerator;
-import utils.generators.VelocityGenerator;
 
 import java.io.FileReader;
 import java.util.ArrayList;
